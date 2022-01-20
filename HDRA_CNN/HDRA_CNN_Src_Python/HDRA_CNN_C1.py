@@ -2,8 +2,7 @@
 # Tanzila Islam
 # PhD Student, Iwate University
 # Email: tanzilamohita@gmail.com
-# Created Date: 1/11/2022
-# ===============================
+# Created Date: 1/17/2022
 # ===============================
 # main modules needed
 import pandas as pd
@@ -39,7 +38,7 @@ os.environ["PATH"] += os.pathsep + 'C:/Program Files (x86)/Graphviz/bin/'
 # np.random.seed(seed)
 
 start_time = time.time()
-X = pd.read_csv('../HDRA_CNN_Data/HDRA_X_C2.csv', index_col=0)#.iloc[0:, 1:]
+X = pd.read_csv('../HDRA_CNN_Data/HDRA_X_C1.csv', index_col=0)#.iloc[0:, 1:]
 # X.columns = np.arange(0, len(X.columns))
 print(X.shape)
 Y = pd.read_csv('../HDRA_CNN_Data/HDRA_Y.csv', index_col=0)#.iloc[0:, 1:]
@@ -66,7 +65,7 @@ index = 0  # first trait analyzed
 corr_df = []
 # print(Y[itrait])
 # Y.shape[1]
-for i in range(4, 5):
+for i in range(11, 12):
     # print(Y[i])
     print(i)
     X_train, X_valid, y_train, y_valid = train_test_split(X, Y[i], test_size=0.2)
@@ -123,7 +122,7 @@ for i in range(4, 5):
     model_cnn.summary()
 
     plot_model(model_cnn, to_file='../HDRA_CNN_ModelMetaData/'
-        'HDRA_CNN_C2/HDRA_CNN_Flowgraph_C2/HDRA_CNN_Flowgraph_C2.png',
+        'HDRA_CNN_C1/HDRA_CNN_Flowgraph_C1/HDRA_CNN_Flowgraph_C1.png',
                show_shapes=True, show_layer_names=True)
 
     es = EarlyStopping(monitor='val_loss', mode='min', verbose=1,
@@ -145,8 +144,8 @@ for i in range(4, 5):
     plt.legend(['train', 'valid'], loc='upper left')
     plt.title('Training and validation loss')
     plt.savefig('../HDRA_CNN_ModelMetaData/'
-        'HDRA_CNN_C2/HDRA_CNN_Loss_C2/'
-                'HDRA_CNN_Loss_C2_Trait_{}'.format(i)
+        'HDRA_CNN_C1/HDRA_CNN_Loss_C1/'
+                'HDRA_CNN_Loss_C1_Trait_{}'.format(i)
                 + '.png')
     # plt.show()
     plt.clf()
@@ -177,8 +176,8 @@ for i in range(4, 5):
     #add linear regression line to scatterplot
     plt.plot(y_valid, m*y_valid+b)
     plt.savefig('../HDRA_CNN_ModelMetaData/'
-        'HDRA_CNN_C2/HDRA_CNN_Prediction_Plot_C2/'
-                'HDRA_CNN_Prediction_Plot_C2_Trait_{}'.format(i) + '.png')
+        'HDRA_CNN_C1/HDRA_CNN_Prediction_Plot_C1/'
+                'HDRA_CNN_Prediction_Plot_C1_Trait_{}'.format(i) + '.png')
     # plt.show()
     plt.clf()
 
@@ -187,13 +186,13 @@ for i in range(4, 5):
 
 
 # np.savetxt('../HDRA_CNN_ModelMetaData/'
-#         'HDRA_CNN_C2/HDRA_CNN_Prediction_Result_C2/'
-#                 'HDRA_CNN_Prediction_Result_C2.csv',
+#         'HDRA_CNN_C1/HDRA_CNN_Prediction_Result_C1/'
+#                 'HDRA_CNN_Prediction_Result_C1.csv',
 #            np.column_stack(corr_df), delimiter=',', fmt='%1.3f', comments='')
 #
-# pathlib.Path("../HDRA_CNN_ModelMetaData/HDRA_CNN_C2/"
-#              "HDRA_CNN_Prediction_Time_C2/"
-#         "HDRA_CNN_Prediction_Time_C2.txt").\
-#     write_text("HDRA_CNN_Prediction_Time_C2: {}"
+# pathlib.Path("../HDRA_CNN_ModelMetaData/HDRA_CNN_C1/"
+#              "HDRA_CNN_Prediction_Time_C1/"
+#         "HDRA_CNN_Prediction_Time_C1.txt").\
+#     write_text("HDRA_CNN_Prediction_Time_C1: {}"
 #         .format(time.time() - start_time))
 print('Total Training Time: ', time.time() - start_time)
