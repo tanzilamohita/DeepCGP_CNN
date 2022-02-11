@@ -65,7 +65,7 @@ index = 0  # first trait analyzed
 corr_df = []
 # print(Y[itrait])
 # Y.shape[1]
-for i in range(11, 12):
+for i in range(4, 5):
     # print(Y[i])
     print(i)
     X_train, X_valid, y_train, y_valid = train_test_split(X, Y[i], test_size=0.2)
